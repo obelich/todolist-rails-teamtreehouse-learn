@@ -35,8 +35,11 @@ group :development, :test do
   gem 'byebug', platform: :mri
 end
 
-group :development, :testing do
-  gem 'rspec-rails'
+group :development, :test do
+  gem 'rspec-rails', '~> 3.5'
+  gem 'shoulda-matchers'
+  gem 'capybara'
+  gem 'factory_girl_rails'
 end
 
 group :test do
