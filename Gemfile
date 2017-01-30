@@ -38,7 +38,6 @@ end
 group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'shoulda-matchers'
-  gem 'capybara'
   gem 'factory_girl_rails'
 end
 

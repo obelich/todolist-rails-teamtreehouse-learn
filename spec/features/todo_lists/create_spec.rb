@@ -2,10 +2,34 @@ require 'spec_helper'
 
 describe "Creating todo lists" do
 
+
+
   it "redirect to the todo list index page on success" do
-    visit todo_lists_url
-    # click_link "New Todo List"
-    # expect(page).to have_content('New Todo List')
+    visit "todo_lists" # Entrar a una URL
+    click_link "New Todo List" # Hacer click en un enlace con contenga el nombre
+    expect(page).to have_content('New Todo List')  # Se espera que en el documento se encuentre el siguiente texto
+
+    fill_in "Title", with: "My todo List" # Se llena un input con el name title
+    fill_in "Description", with: "This is what I`m doing today" # Se llena input con el name Description
+    click_button "Create Todo list" # Se da click en el boton de submit
+
+    expect(page).to have_content('My todo List')
+  end
+
+  it "Display an error when the todo list has no title" do
+    expect(TodoList.count).to eq(0)
+    visit "todo_lists" # Entrar a una URL
+    click_link "New Todo List" # Hacer click en un enlace con contenga el nombre
+    fill_in "Title", with: ""
+    fill_in "Description", with: "This is what I`m doing today" # Se llena input con el name Description
+    click_button "Create Todo list" # Se da click en el boton de submit
+
+    expect(page).to have_content('error')
+    expect(TodoList.count).to eq(0)
+
+    visit "todo_lists"
+    expect(page).to_not have_content('This is what I`m doing today')
+
   end
 
 end
